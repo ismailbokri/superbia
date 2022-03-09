@@ -7,58 +7,27 @@
 #include<SDL/SDL_audio.h>
 
 
-#define STAT_SOL 0
-#define STAT_AIR 1
- 
-#define STAT_MARCHE 1
-#define STAT_NOT_MARCHE 0
-
 typedef struct  personnage
 {
 	int vie;
-	int vitesse;
+	float vitesse;
 	SDL_Rect position_personnage; 
-	SDL_Surface *tab[/*nb*/];
-	float time;
-	int score;
+	SDL_Rect posSprit;
+	SDL_Surface *imgperso;
+	float score;
 	SDL_Rect pos_score;
-        int status;
-        float x,y;
+        int sens;
 }personnage;
 
-
-
-void initialiser_personnage(personnage *p);
+/*------initialisation------*/
+void initPerso(Personnage *p);
+/*-------affichage_personnage-----*/
 void afficher_personnage(personnage p,SDL_Surface *ecran);
-
-
-/* 
 /*---- animations -----*/
-
-void animation_walk_right (personnage *p);
-void animation_walk_left (personnage *p);
-
-void animation_jump_right (personnage *p);
-void animation_jump_left (personnage *p);
-
-void animation_run_right (personnage *p);
-void animation_run_left (personnage *p);
-
-void animation_fail_right (personnage *p);
-void animation_slide_right (personnage *p);
-void animation_crouch_right (personnage *p);
-
-void animation_attack_right (personnage *p);
-void animation_attack_left (personnage *p);
-
+void animerPerso (Personnage* p);
 /*---- deplacements ----*/
-
-void deplacement_clavier_left(personnage *p,int clic);
-void deplacement_souris(personnage *p,int clic);
-
-
+void deplacerPerso (personnage *p,int clic);
 /*---- controle saut ---------*/
-
 void Saute(personnage *p);
 
 #endif // HEADER5_H_INCLUDED
