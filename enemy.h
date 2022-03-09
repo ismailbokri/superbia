@@ -7,9 +7,9 @@
 
 typedef struct
 {
-	SDL_Surface *img; //sprite cheet
-	Mix_Chunk *son; //son bref dans l'ataque
-	SDL_Rect posaff,posimg; //pos aff = position dans l'ecran / pos img = la position du l'image 
+	SDL_Surface *imgEnemy; //sprite cheet
+	//Mix_Chunk *son; //son bref dans l'ataque
+	SDL_Rect posEn,posSprit; //posen = position dans l'ecran / possprit = la position du l'image 
 	int direct; //direction
 	
 }es;
