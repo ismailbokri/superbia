@@ -1,4 +1,3 @@
-
 #include <stdlib.h> 
 #include <stdio.h> 
 #include <SDL/SDL.h>
@@ -44,21 +43,4 @@ void animation_jump_left (personnage *p);
 
 void animation_run_right (personnage *p);
 void animation_run_left (personnage *p);
-
-void animation_fail_right (personnage *p);
-void animation_slide_right (personnage *p);
-void animation_crouch_right (personnage *p);
-
-void animation_attack_right (personnage *p);
-void animation_attack_left (personnage *p);
-
-*/
-/*---- deplacements ----*/
-
-void deplacement_clavier_left(personnage *p,int clic);
-void deplacement_souris(personnage *p,int clic);
-
-
-/*---- controle saut ---------*/
-void saut (Personne* p);
 
