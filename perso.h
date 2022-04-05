@@ -1,46 +1,49 @@
-#include <stdlib.h> 
-#include <stdio.h> 
+#ifndef Text_H
+#define Text_H
 #include <SDL/SDL.h>
-#include <SDL/SDL_image.h> 
-#include <SDL/SDL_mixer.h> 
-#include <SDL/SDL_ttf.h> 
-#include<SDL/SDL_audio.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
+#include <stdio.h>
+#include <SDL/SDL_mixer.h>
+#include <time.h>
 
+typedef struct{
+	SDL_Rect pos ;
+	SDL_Surface *img ;
+}image;
 
-#define STAT_SOL 0
-#define STAT_AIR 1
- 
-#define STAT_MARCHE 1
-#define STAT_NOT_MARCHE 0
 
 typedef struct  personnage
 {
 	int vie;
-	int vitesse;
+	float vitesse;
+        float acceleration;
 	SDL_Rect position_personnage; 
-	SDL_Surface *tab[/*nb*/];
-	float time;
-	int score;
+	SDL_Rect posSprit;
+	SDL_Surface *imgperso;
+	float score;
 	SDL_Rect pos_score;
-        int status;
-        float x,y;
+        int sens;        
+        int crouch;
+        int up;
+	SDL_Rect posrel;        
 }personnage;
 
-
-
-void initialiser_personnage(personnage *p);
+/*------initialisation------*/
+void initPerso(personnage *p);
+/*-------affichage_personnage-----*/
 void afficher_personnage(personnage p,SDL_Surface *ecran);
-
-
-/* 
 /*---- animations -----*/
+void animerPerso (int action,personnage* p);
+/*---- deplacements ----*/
+void deplacerPerso (personnage *p,int action,Uint32 dt);
+/*---- controle saut ---------*/
+void Saute(personnage *p,int action);
+/*------reglage de vitesse-------*/
+void vitesse_perso(personnage *p,int action,Uint32 dt);
 
-void animation_walk_right (personnage *p);
-void animation_walk_left (personnage *p);
+/*......afficher une background......*/ 
+void init_bg(image *D);
+void afficher(image p,SDL_Surface *ecran);
 
-void animation_jump_right (personnage *p);
-void animation_jump_left (personnage *p);
-
-void animation_run_right (personnage *p);
-void animation_run_left (personnage *p);
-
+#endif
