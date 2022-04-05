@@ -32,3 +32,4 @@ int Play_Enigme(Enigme *e,SDL_Surface *ecran,int *Game);
 void Display_Enigme(Enigme *e,SDL_Surface *ecran);
 int Verify_Enigme(Enigme *e,int *Game,SDL_Surface *ecran);
 void Free_Enigme(Enigme *e);
+#endif
