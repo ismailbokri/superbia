@@ -1,3 +1,84 @@
+#include "enigme2.h"
+
+void initenigme(enigme *e)
+    {
+        
+        TTF_Init();
+
+
+        
+        //background
+        e->background=IMG_Load(str);//img random engime 
+        //background pos
+        e->background_pos.x = 200;
+        e->background_pos.y = 200;
+
+        //buttons a b c
+        e->buttonA[0]=IMG_Load("resources/image/engimepic/blackbutton.png");
+        e->buttonA[1]=IMG_Load("resources/image/engimepic/whitebutton.jpeg");
+
+        e->buttonB[0]=IMG_Load("resources/image/engimepic/blackbutton.png");
+        e->buttonB[1]=IMG_Load("resources/image/engimepic/whitebutton.jpeg");
+
+        e->buttonC[0]=IMG_Load("resources/image/engimepic/blackbutton.png");
+        e->buttonC[1]=IMG_Load("resources/image/engimepic/whitebutton.jpeg");
+
+
+        //right or false
+        e->congra[0]=IMG_Load("resources/image/engimepic/right.png");
+        e->congra[1]=IMG_Load("resources/image/engimepic/false.png");
+
+        //pos buttons a b c
+        //a
+        e->pos_A.x= 200;
+        e->pos_A.y= 500;
+        //b
+        e->pos_B.x= 400;
+        e->pos_B.y= 500;
+        //c
+        e->pos_C.x= 600;
+        e->pos_C.y= 500;
+
+        //correct or false
+        e->pos_yes_no.x= 450;
+        e->pos_yes_no.y= 450;
+        //pos time
+        e->pos_time.x= 700;
+        e->pos_time.y= 100;
+
+        //pos reponse 1
+        e->pos_reponse1txt.x= 200;
+        e->pos_reponse1txt.y= 500;
+        //pos rep 2
+        e->pos_reponse1txt.x= 400;
+        e->pos_reponse1txt.y= 500;
+        //pos rep 3
+        e->pos_reponse1txt.x= 600;
+        e->pos_reponse1txt.y= 500;
+
+        //random position for awnser
+        x= rand() % 3;//position random number 0--2 correct awnser
+
+        e->positionVraiReponse=x;
+        e->vrai_reponse=get_correct(i);//reponse
+
+
+    //awnsers 
+    int k;   
+        for(k=0;k<3;k++)
+            {
+                if(k!=x)
+                    {
+                        e->reponse[k]=rand() %100;
+                    }
+                else 
+                    {
+                        e->reponse[k]=e->vrai_reponse;
+                    }
+            }
+   
+   
+    }
 void afficher_enigme(enigme *e,SDL_Surface *screen)
     {
 
@@ -5,7 +86,7 @@ void afficher_enigme(enigme *e,SDL_Surface *screen)
         TTF_Init();
 
         TTF_Font *police = NULL;
-        police = TTF_OpenFont("resources/SFPRODISPLAYMEDIUM.ttf", 20);
+        police = TTF_OpenFont("resources/sky.jpg", 20);
 
 
 
@@ -231,4 +312,5 @@ while(continuer)
 
     TTF_CloseFont(police);
     TTF_Quit();
-}     
+}      
+    	

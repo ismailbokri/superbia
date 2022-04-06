@@ -1,3 +1,9 @@
+#include <SDL/SDL_image.h>
+//#include <SDL/SDL_mixer.h>
+#include <SDL/SDL.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include<unistd.h>
 typedef struct{
     SDL_Surface *background;
     SDL_Surface *buttonA[2];//repons
