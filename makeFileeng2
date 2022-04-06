@@ -1,7 +1,0 @@
-prog: enigme2.o mainenigme2.o
-	gcc mainenigme.o enigme2.o -o prog -lSDL -lSDL_image -lSDL_ttf -lSDL_mixer
-mainenigme2.o: mainenigme2.c
-	gcc -c mainenigme2.c -g
-enigme2.o: enigme2.c
-	gcc -c enigme2.c -g
-
