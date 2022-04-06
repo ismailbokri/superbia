@@ -3,7 +3,6 @@
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include<unistd.h>
 //#include "perso.h"
 
 typedef struct
@@ -25,5 +24,5 @@ void initenemy(es *e);
 void afficherenemy(es e,SDL_Surface *screen);
 void animerenemy(es *e);
 void deplacer(es *e);
-//int collusion(personne p,es e);
+int collisionBox(SDL_Rect a, SDL_Rect b);
 //void deplacerAI(es *e,SDL_Rect posper);
