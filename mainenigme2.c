@@ -9,6 +9,7 @@
 void main ()
 {
 SDL_Surface* screen;
+SDL_event event;
 screen = SDL_SetVideoMode(1397,860, 32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 enigme e ;
 initenigme(enigme *e);
