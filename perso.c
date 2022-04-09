@@ -62,11 +62,7 @@ p->posSprit.x=450;
 {p->crouch=1;
 p->posSprit.x=0;
 }
-
-
 break;
-
-
 case 2:
 p->crouch=0;
  if(p->sens==1){
@@ -105,7 +101,7 @@ if(p->posSprit.x>1050) ////(si dernier frame atteint)
 p->posSprit.x=0;  ////// (revenir au premier frame)
 }
 else 
-p->posSprit.x = p->posSprit.x+161; 
+p->posSprit.x = p->posSprit.x+163; 
 }
 else if(p->sens==0){
 p->posSprit.y =320;////(se positionner dans la ligne correspondant a la direction)
@@ -115,7 +111,7 @@ if(p->posSprit.x>1050) ////(si dernier frame atteint)
 p->posSprit.x=0;  ////// (revenir au premier frame)
 }
 else 
-p->posSprit.x = p->posSprit.x+161; 
+p->posSprit.x = p->posSprit.x+163; 
 }
 break;
 
@@ -141,6 +137,19 @@ p->posSprit.x=0;  ////// (revenir au premier frame)
 }
 else 
 p->posSprit.x = p->posSprit.x+156; 
+break;
+
+
+
+
+case 6:
+p->posSprit.y =779;////(se positionner dans la ligne correspondant a la direction)
+p->posSprit.x=0;  ////// (revenir au premier frame)
+break;
+
+case 8:
+p->posSprit.y =630;////(se positionner dans la ligne correspondant a la direction)
+p->posSprit.x=0;  ////// (revenir au premier frame)
 break;
 
 
@@ -176,11 +185,6 @@ SDL_Delay(500);
 if(p->posSprit.x>=600)
 p->posSprit.x=0;
 }
-
-
-
-
-
 break;
 }
 }
@@ -240,6 +244,11 @@ case 6:
 if((p->vitesse)>0.1)
 (p->acceleration)-=0.005;
 break;
+
+case 8: 
+if((p->vitesse)>0.1)
+(p->acceleration)-=0.005;
+break;
 }
 
 if((p->vitesse)>0.5)
@@ -251,26 +260,89 @@ p->vitesse=0.1;
 
 void Saute(personnage *p,int action){
 
-if((p->up==0)&&(p->position_personnage.y>540)){
-p->position_personnage.y-=70;
-}
+if((p->up==0)&&(p->position_personnage.y>540))
+		p->position_personnage.y-=70;
 else if ((p->up==0)&&(p->position_personnage.y==540))
-{p->up=1;
-}
+p->up=1;
+
+
 
 if((p->up==1)&&(p->position_personnage.y<680))
 p->position_personnage.y+=70;
 else if ((p->up==1)&&(p->position_personnage.y==680))
-{p->up=0;
-printf("dd");
-}
+p->up=0;
+
+
 
 if(p->sens==1)
-p->position_personnage.x +=70;
+p->position_personnage.x +=50;
 
 if(p->sens==0)
-p->position_personnage.x -=70;      
+p->position_personnage.x -=50;
 }
 
 
+void mis_a_jour(personnage *p,int *action,int *att,int *jum,int *retl,int *retr) {
 
+switch(*action){
+case 1:
+	(*jum)=0;
+	(*att)=0;
+	(*retr)=0;
+	(*retl)=0;
+break;
+
+case 2:
+	(*att)=0;
+	(*retr)=0;
+	(*retl)=0;
+	(*jum)++;
+
+break;
+
+case 3:
+	(*jum)=0;
+	(*att)=0;
+	(*retr)=0;
+	(*retl)=0;
+	(*action)=0;
+break;
+
+case 4:
+	(*jum)=0;
+	(*att)=0;
+	(*retr)=0;
+	(*retl)=0;
+	p->sens=1;
+
+break;
+
+case 5:
+	(*jum)=0;
+	(*att)=0;
+	(*retr)=0;
+	(*retl)=0;
+	p->sens=0;
+
+break;
+
+case 7:
+	(*jum)=0;
+	(*retr)=0;
+	(*retl)=0;
+	(*action)=0;
+break;
+
+case 6:
+retr++;
+break;
+
+
+case 8:
+retr--;
+break;
+
+}
+
+
+}
