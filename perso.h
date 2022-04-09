@@ -41,6 +41,8 @@ void deplacerPerso (personnage *p,int action,Uint32 dt);
 void Saute(personnage *p,int action);
 /*------reglage de vitesse-------*/
 void vitesse_perso(personnage *p,int action,Uint32 dt);
+/*fonction mis a jour*/
+void mis_a_jour(personnage *p,int *action,int *att,int *jum,int *retl,int *retr);
 
 /*......afficher une background......*/ 
 void init_bg(image *D);
