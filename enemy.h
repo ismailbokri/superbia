@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include "perso.h"
+// #include "perso.h"
 
 typedef struct
 {
@@ -14,11 +14,11 @@ typedef struct
 	
 }es;
 
-typedef struct
+/*typedef struct
 {
 	SDL_Surface *img; //background
 	SDL_Rect pos; //position
-}background;
+}background;*/
 
 void initenemy(es *e);
 void afficherenemy(es e,SDL_Surface *screen);

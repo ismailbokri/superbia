@@ -7,10 +7,10 @@
 #include <SDL/SDL_mixer.h>
 #include <time.h>
 
-typedef struct{
+/*typedef struct{
 	SDL_Rect pos ;
 	SDL_Surface *img ;
-}image;
+}image;*/
 
 
 typedef struct  personnage
