@@ -1,6 +1,6 @@
 #include "perso.h"
 #include "enemy.h"
-#include "back.h"
+#include "background.h"
 #include <math.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -17,22 +17,23 @@ int main()
 	es E;
 	image oiseau;
 	SDL_Surface* ecran;
-	int cont=0;
+	int cont=0,frame=0,FPS=10;
 	int action=0,att=0,jum=0,retl=0,retr=0;               //le variable retl nous aide a faire l'animation de retard a gauche 
 	SDL_Init ( SDL_INIT_VIDEO );
 	SDL_Event event;
 	SDL_Event event2;
 	Mix_Chunk *sonbref1;
 	Mix_Chunk *sonbref2;
-	Uint32 dt, t_prev;
+	Uint32 dt, t_prev,start;
 ////////////////////////////////////////       INITIALISATION       ////////////////////////////////////////
-	ecran= SDL_SetVideoMode(1800,720, 32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+	ecran= SDL_SetVideoMode(1397,860, 32,SDL_HWSURFACE|SDL_DOUBLEBUF);
 	initPerso(&p);
 	initialiser_backround (&bg);
 	initenemy(&E);
 	initasfour(&oiseau);
 	sonbref1=Mix_LoadWAV("/home/alaa/superbia/Jump_sound.mp3");	
 	sonbref2=Mix_LoadWAV("/home/alaa/superbia/Sword Sound Effect .mp3");	
+
 ////////////////////////////////////////       BOUCLE DU JEUX       ////////////////////////////////////////
 	while(cont==0)
 	{
@@ -42,9 +43,12 @@ int main()
 		{
 			dt=SDL_GetTicks()-t_prev;
 		}while(dt<50);
+		animerenemy(&E);
+		deplacer(&E);
 		SDL_PollEvent(&event);
 		if (event.type==SDL_KEYDOWN )
 		{
+		mis_a_jour(&p,&action,&att,&jum,&retl,&retr); 
 			switch(event.key.keysym.sym)
 			{	
 				///crouch
@@ -64,10 +68,13 @@ int main()
 						do
 							dt=SDL_GetTicks()-t_prev;
 						while(dt<80);
-						afficher(bg,ecran);
+						afficher_background(ecran,&bg);
 						Saute(&p,action);
 						animerPerso (action,&p);
 						afficher_personnage(p,ecran);
+						animerenemy(&E);
+						deplacer(&E);
+						afficherenemy(E,ecran);
 						SDL_Flip(ecran);
 						jum++; 
 					}				
@@ -97,14 +104,17 @@ int main()
 					{
 						t_prev=SDL_GetTicks();	//au début de la boucle de jeu
 						dt=0;
-						do
+						do{
 							dt=SDL_GetTicks()-t_prev;
-						while(dt<40);
-						afficher(bg,ecran);
+						}while(dt<40);
+						afficher_background(ecran,&bg);
 						vitesse_perso(&p,action,dt);
 						deplacerPerso (&p,action,dt);
 						animerPerso (action,&p);
 						afficher_personnage(p,ecran);
+						animerenemy(&E);
+						deplacer(&E);
+						afficherenemy(E,ecran);
 						SDL_Flip(ecran);
 						att++; 
 					}
@@ -114,7 +124,7 @@ int main()
 	
 		else if (event.type==SDL_QUIT)
 		{
-			showperso=1;
+			cont=1;
 			break;
 		}
 		////reduire la vitesse du joueur si aucune bouton n'est pressé ////
@@ -131,16 +141,40 @@ int main()
 					action=8;
 			}
 		}
-	
+		if (collisionBox(p.position_personnage,E.posEN))
+		{
+			action=7; 
+					if(att==0)
+					p.posSprit.x=0;
+					while(att<4)
+					{
+						t_prev=SDL_GetTicks();	//au début de la boucle de jeu
+						dt=0;
+						do{
+							dt=SDL_GetTicks()-t_prev;
+						}while(dt<40);
+						afficher_background(ecran,&bg);
+						vitesse_perso(&p,action,dt);
+						deplacerPerso (&p,action,dt);
+						animerPerso (action,&p);
+						afficher_personnage(p,ecran);
+						animerenemy(&E);
+						deplacer(&E);
+						afficherenemy(E,ecran);
+						SDL_Flip(ecran);
+						att++; 
+					}
+		}
 		vitesse_perso(&p,action,dt);
-		afficher(bg,ecran);
+		afficher_background(ecran,&bg);
+		if(att<2)
 		deplacerPerso (&p,action,dt); 
-		if(jum<2)
+		if(jum<2&&att<2)
 			animerPerso (action,&p);
 		afficher_personnage(p,ecran);
+		afficherenemy(E,ecran);
 		mis_a_jour(&p,&action,&att,&jum,&retl,&retr); 
 		SDL_Flip(ecran);
-		mis_a_jour(&p,&action,&att,&jum,&retl,&retr); 
 	}
 	SDL_FreeSurface(ecran);
 	return 0;
