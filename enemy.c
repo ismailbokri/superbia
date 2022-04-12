@@ -3,8 +3,8 @@
 void initenemy(es *e)
 {
 	e->imgEnemy = IMG_Load ("enemy.png");
-	e->posEN.x = 100;
-	e->posEN.y = 130;
+	e->posEN.x = 400;
+	e->posEN.y = 520;
 	e->posEN.w = 156;
 	e->posEN.h = 156;
 	e->posSprit.x = 0;
@@ -60,21 +60,11 @@ void deplacer(es *e)
 }
 
 int collisionBox(SDL_Rect a, SDL_Rect b)
-{
-	int leftSideA = a.x;
-	int rightSideA = a.x + a.w;
-	int topA = a.y;
-	int bottomA = a.y + a.h;
-
-	int leftSideB = b.x;
-	int rightSideB = b.x + b.w;
-	int topB = b.y;
-	int bottomB = b.y + b.h;
-
-	if((bottomA <= topB)||(topA >= bottomB)||(rightSideA <= leftSideB)||(leftSideA >= rightSideB))
-		return 1;
-	else
-		return 0;
-} 
+{ 
+    if(a.x+a.h<b.x || a.x>b.x+b.w ||a .y+a.h<b.y || a.y>b.y+b.h)
+        return 0;
+        else 
+        return 1;
+}
 
 

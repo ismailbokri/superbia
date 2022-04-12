@@ -10,30 +10,26 @@
 #define SCREEN_H 1000
 #define SCREEN_W 720
 
-typedef struct{
+typedef struct image{
 	SDL_Rect pos;
 	SDL_Surface *img,image;
 	SDL_Rect camera;
-   
-
 }image;
-typedef struct  
-{
+
+typedef struct background{
   SDL_Surface *bg;
 SDL_Surface *background;
 	    SDL_Rect camera;
       SDL_Rect pos;
 }background;
 
-void initialiser_backround (background *b);
-
-void afficher_background (SDL_Surface *screen,background *b);
-typedef struct {
+typedef struct music1{
 Mix_Music *musique;
 int vol;
 } music1;
 
-
+void initialiser_backround (background *b);
+void afficher_background (SDL_Surface *screen,background *b);
 
 void initBackground(image *Backg);
 void initasfour(image *asfour);
@@ -51,4 +47,5 @@ void scrolling_left (background *b);
 void scrolling_UP (background *b);
 void scrolling_down (background *b);
 void free_memory (background *b );
+
 #endif

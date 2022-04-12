@@ -3,7 +3,7 @@
 #include <SDL/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-// #include "perso.h"
+ 
 
 typedef struct
 {

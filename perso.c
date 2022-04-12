@@ -1,4 +1,5 @@
 #include "perso.h"
+#include "background.h"
 #include <math.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -12,9 +13,9 @@
 void initPerso(personnage *p){
 
 p->sens=1;/*-----sens==1(turn right)------/-----sens==0(turn left)------*/
-p->imgperso = IMG_Load("/home/ismail/Desktop/psh/sprite-sheet2.png");
+p->imgperso = IMG_Load("/home/alaa/superbia/sprite-sheet2.png");
 p->position_personnage.x=0;
-p->position_personnage.y=680;
+p->position_personnage.y=520;
 
 p->crouch=0;
 
@@ -210,7 +211,7 @@ p->position_personnage.x +=50;
 }
 
 
-void init_bg(image *D){
+/*void init_bg(image *D){
 D->img = IMG_Load("/home/ismail/Desktop/psh/bg roman.png");
 	D->pos.x = 0;
 	D->pos.y = 0;
@@ -221,7 +222,7 @@ void afficher(image p,SDL_Surface *ecran)
 {
 	SDL_BlitSurface(p.img,NULL,ecran,&p.pos);
 }
-
+*/
 
 
 void vitesse_perso(personnage *p,int action,Uint32 dt){
@@ -260,16 +261,16 @@ p->vitesse=0.1;
 
 void Saute(personnage *p,int action){
 
-if((p->up==0)&&(p->position_personnage.y>540))
+if((p->up==0)&&(p->position_personnage.y>380))
 		p->position_personnage.y-=70;
-else if ((p->up==0)&&(p->position_personnage.y==540))
+else if ((p->up==0)&&(p->position_personnage.y==380))
 p->up=1;
 
 
 
-if((p->up==1)&&(p->position_personnage.y<680))
+if((p->up==1)&&(p->position_personnage.y<520))
 p->position_personnage.y+=70;
-else if ((p->up==1)&&(p->position_personnage.y==680))
+else if ((p->up==1)&&(p->position_personnage.y==520))
 p->up=0;
 
 
