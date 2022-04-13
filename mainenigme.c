@@ -1,56 +1,65 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "enigme.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
+#include <SDL/SDL_ttf.h>
+#include "enigmef.h"
 
-int main()
+
+int main (int argc, char **argv)
 {
-	SDL_Surface *ecran;
-	SDL_Event event;
-	Enigme e;
-	int boucle=1;
-	int scene=1;
-	Init_Enigme(&e);
-	int Game;
-	
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		fprintf(stderr, "Echec d'initialisation de SDL.\n");
-		return 1;
+enigme en; 
+int done=1;
+int x,y;
+SDL_Init (SDL_INIT_EVERYTHING);
+TTF_Init();
+SDL_Surface *screen;
+screen= SDL_SetVideoMode(800,600,32,SDL_HWSURFACE|SDL_DOUBLEBUF);
+SDL_Event event;
+initenigme(&en);
+while(done){
+while(SDL_PollEvent(&event)){
+switch (event.type){
+	case SDL_QUIT:
+		done=0;
+		break;
+
+	case SDL_KEYDOWN:
+		switch(event.key.keysym.sym){
+		case SDLK_ESCAPE:
+		done=0;
+		break;
+		case SDLK_a:
+		en.rep=1;
+		break;
+		case SDLK_b:
+		en.rep=2;
+		break;
+		case SDLK_c:
+		en.rep=3;
+		break;
+		}
+
+	case SDL_MOUSEBUTTONDOWN:
+
+		if(event.button.button ==SDL_BUTTON_LEFT){
+		if(en.rep!=0){done=0;}else{
+		for(int i=0;i<3;i++)
+		if(input(en.posb[i],event.button.x,event.button.y)){
+		en.rep=i+1;
+		}}
+		}break;
+
+	case SDL_MOUSEMOTION:
+		x=event.motion.x;
+		y=event.motion.y;
 	}
-	//SDL_WM_SetIcon(IMG_Load("img/cursor.png"), NULL);
-	printf("Bonjour le monde, SDL est initialisé avec succès.\n");
-	ecran = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);
-        
-	while(boucle==1)
-	{
-		boucle=Play_Enigme(&e,ecran,&Game);
-	}
-	if(Game)
-	{
-		printf("you win!!!");
-	}
-	else
-	{
-		printf("you lost!!!");
-	}		
-	//Free_Enigme(&e);
-	SDL_Quit();
-	exit(0);
-	return EXIT_SUCCESS;
-	return 0;
+}  
+afficherenigmef(&en,screen,x,y);
+SDL_Flip (screen);
+SDL_Delay (40);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+TTF_Quit;
+SDL_Quit;
+}

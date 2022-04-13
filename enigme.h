@@ -1,35 +1,19 @@
-#ifndef ENIGME_H_INCLUDED
-#define ENIGME_H_INCLUDED
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h> 
-#include <SDL/SDL_mixer.h>
-
-typedef struct 
-{
-	SDL_Surface *background[2];
-	SDL_Surface *boutons[5];
-	SDL_Surface *reponses[5];
-	SDL_Surface *question;
-	SDL_Surface *win;
-	SDL_Surface *lost;
-	
-	SDL_Rect posRepones[5];
-	SDL_Rect posQuestion;
-	int choix_question;
-	int image_courrante;
-	int positionVraiReponse;
-          
-      
-}Enigme;
+#ifndef __ENIGME_H__
+#define __ENIGME_H__
+typedef struct{
+SDL_Surface *back[5];
+SDL_Surface *b[3];
+SDL_Surface *a[3];
+SDL_Surface *question,*faild,*passed;
+SDL_Rect posb[3],posq;
+SDL_Color color;
+TTF_Font *font,*font2,*font3;
+int rep,solution,loop;
+}enigme;
 
 
-void Init_Enigme(Enigme *e);
-int Play_Enigme(Enigme *e,SDL_Surface *ecran,int *Game);
-void Display_Enigme(Enigme *e,SDL_Surface *ecran);
-int Verify_Enigme(Enigme *e,int *Game,SDL_Surface *ecran);
-void Free_Enigme(Enigme *e);
+int input(SDL_Rect pos,int x,int y);
+void initenigme(enigme *e);
+void changechar(char ch[]);
+void afficherenigmef(enigme *e,SDL_Surface *screen,int x,int y);
 #endif
